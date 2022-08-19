@@ -12,11 +12,10 @@ namespace Storage.Repositories
 
         }
 
-        public User GetUserByName(LoginRequest loginDto)
+        public User GetUserByEmail(string email)
         {
             return _context.Users
-                        .Where( u => u.Email == loginDto.Email && u.Password == loginDto.Password)
-                        .FirstOrDefault();
+                        .FirstOrDefault(u => u.Email == email);
         }
 
         

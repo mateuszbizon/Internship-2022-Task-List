@@ -5,6 +5,6 @@ namespace Storage.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        User GetUserByName(LoginRequest loginDto);
+        User GetUserByEmail(string email);
     }
 }

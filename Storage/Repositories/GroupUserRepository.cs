@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Storage.Repositories
 {
-    public class GroupUser
+    public class GroupUserRepository
     {
     }
 }

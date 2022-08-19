@@ -11,21 +11,21 @@ namespace Storage.Services
         {
             _groupRepository = groupRepository;
         }
-        public async Task CreateGroup(GroupRequest group)
+        public async Task CreateGroup(GroupRequest request)
         {
-            var groupDto = new Group
+            var group = new Group
             {
-                Name = group.Name,
+                Name = request.Name,
             };
             /*
-            groupDto.GroupsUsers.Add(new()
+            group.GroupsUsers.Add(new()
             {
                 //UsersId = ,
                 IsAdmin = true,
             });
 
             */
-            await _groupRepository.CreateAsync(groupDto);
+            await _groupRepository.CreateAsync(group);
         }
     }
 }

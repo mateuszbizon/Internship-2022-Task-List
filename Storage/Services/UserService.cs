@@ -1,42 +1,66 @@
 ﻿using Helpers.Requests;
+using Microsoft.AspNetCore.Identity;
 using Storage.Interfaces;
 using Storage.Models;
+using System.Text.RegularExpressions;
 
 namespace Storage.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
         {
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
         }
 
-        public async Task CreateUser(UserRequest user)
+        public async Task<(bool success, string message)> CreateUser(RegistrationRequest request)
         {
-            var userDto = new User
+            try
             {
-                Email = user.Email,
-                Password = user.Password,
-                IsConfirmed = user.IsConfirmed,
-            };
+                var existingUser = _userRepository.GetUserByEmail(request.Email);
+                if (existingUser != null)
+                    return (success: false, message: "Ten email jest juz zajety");
 
-            await _userRepository.CreateAsync(userDto);
+                User user = new User()
+                {
+                    Email = request.Email,
+                    IsConfirmed = false, //TODO
+                };
+
+                var hashedPassword = _passwordHasher.HashPassword(user, request.Password);
+                user.Password = hashedPassword;
+
+                await _userRepository.CreateAsync(user);
+
+                return (success: true, message: "Stworzono uzytkownika");
+            }
+                catch(Exception ex)
+            {
+                return (success: false, message: ex.Message);
+            }
+
         }
 
-        public void Login(LoginRequest loginDto)
+        public async Task<(bool success, string message)> Login(UserRequest request)
         {
-            var result = _userRepository.GetUserByName(loginDto);
+            var user = _userRepository.GetUserByEmail(request.Email);
+            if (user == null)
+            {
+                return (success: false, message: "Bledny email lub haslo");
+            }                
 
-            if (result == null)
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, request.Password);
+
+            if(result == PasswordVerificationResult.Failed)
             {
-                Console.WriteLine("Nie zalogowano");
+                return (success: false, message: "Bledny email lub haslo");
             }
-            else
-            {
-                Console.WriteLine("Zalogowano");
-            }
+
+            return (success: true, message: "Zalogowano");
         }
     }
 }
