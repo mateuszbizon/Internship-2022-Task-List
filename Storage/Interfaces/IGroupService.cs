@@ -4,6 +4,6 @@ namespace Storage.Interfaces
 {
     public interface IGroupService
     {
-        Task CreateGroup(GroupRequest group);
+        Task<(bool success, string message)> CreateGroup(GroupRequest group);
     }
 }

@@ -10,6 +10,6 @@ namespace Storage.Models
         public string Name { get; set; }
 
         public virtual ICollection<GroupUser> GroupsUsers { get; set; }
-        public virtual ICollection<TaskList> TaskLists { get; set; }
+        public virtual ICollection<TaskEntity> TaskLists { get; set; }
     }
 }

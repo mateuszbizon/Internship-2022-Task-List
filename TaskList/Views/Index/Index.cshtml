@@ -13,7 +13,7 @@
         <div class="logo">Task<span class="blue-text">List</span></div>
         <ul>
             <li><a href="@Url.Action("Index", "Index")">Strona główna</a></li>
-            <li><a href="">Zaloguj się</a></li>
+            <li><a href="@Url.Action("Login", "Index")">Zaloguj się</a></li>
             <li><a href="@Url.Action("Register", "Index")">Zarejestruj się</a></li>
         </ul>
         <button class="burger">
@@ -30,6 +30,7 @@
             <p>W miejscu gdzie stworzysz Task<span class="blue-text">Liste</span></p>
         </div>
     </header>
+    <section style="height: 100vh;"></section>
     <script src="~/js/index.js"></script>
 </body>
 </html>

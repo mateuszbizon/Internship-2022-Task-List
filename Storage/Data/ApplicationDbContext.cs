@@ -17,7 +17,7 @@ namespace Storage.Data
 
         public virtual DbSet<TaskRow> TaskRows { get; set; }
 
-        public virtual DbSet<TaskList> TaskLists { get; set; }
+        public virtual DbSet<TaskEntity> TaskLists { get; set; }
         public virtual DbSet<GroupUser> GroupUser { get; set; }
     }
 

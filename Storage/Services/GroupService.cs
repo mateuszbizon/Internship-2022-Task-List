@@ -10,22 +10,30 @@ namespace Storage.Services
         public GroupService(IGroupRepository groupRepository)
         {
             _groupRepository = groupRepository;
-        }
-        public async Task CreateGroup(GroupRequest request)
+        } 
+        public async Task<(bool success, string message)> CreateGroup(GroupRequest request)
         {
+            var existingGroup = _groupRepository.GetGroupByName(request.Name);
+
+            if (existingGroup != null)
+            {
+                return (success: false, message: "Nazwa grupy jest juz zajeta");
+            }
+
             var group = new Group
             {
-                Name = request.Name,
+                Name = request.Name
             };
-            /*
-            group.GroupsUsers.Add(new()
-            {
-                //UsersId = ,
-                IsAdmin = true,
-            });
 
-            */
+            //group.GroupsUsers.Add(new()
+            //{
+            //    UsersId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+            //    IsAdmin = true,
+            //});
+
+
             await _groupRepository.CreateAsync(group);
+            return (success: true, message: "Stworzono grupę");
         }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Storage.Models
 {
-    public class TaskList
+    public class TaskEntity
     {
         [Key]
         public int Id { get; set; }

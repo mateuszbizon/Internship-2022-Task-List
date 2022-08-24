@@ -1,7 +1,8 @@
 ﻿using Helpers.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Storage.Interfaces;
+using System.Security.Claims;
 
 namespace TaskList.Controllers
 {
@@ -21,12 +22,18 @@ namespace TaskList.Controllers
         }
 
         [HttpPost(Name = "Login")]
-        public async Task<IActionResult> Login(UserRequest login)
+        public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             var result = await _userService.Login(login);
 
             ViewBag.Success = result.success;
             ViewBag.Message = result.message;
+
+            if (result.success)
+            {
+                //return RedirectToAction("Home", "Home");
+                return Ok(result.message);
+            }
 
             return View("Login");
         }
@@ -40,8 +47,8 @@ namespace TaskList.Controllers
         [HttpPost(Name = "Register")]
         public async Task<IActionResult> Register(RegistrationRequest registration)
         {
-            var result = await _userService.CreateUser(registration);          
-           
+            var result = await _userService.CreateUser(registration);
+
             ViewBag.Success = result.success;
             ViewBag.Message = result.message;
 
