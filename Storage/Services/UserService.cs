@@ -1,8 +1,11 @@
 ﻿using Helpers.Requests;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Storage.Interfaces;
 using Storage.Models;
-using System.Text.RegularExpressions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Storage.Services
 {
@@ -10,11 +13,13 @@ namespace Storage.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IConfiguration _config;
 
-        public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
+        public UserService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher, IConfiguration config)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+            _config = config;
         }
 
         public async Task<(bool success, string message)> CreateUser(RegistrationRequest request)
@@ -38,29 +43,75 @@ namespace Storage.Services
 
                 return (success: true, message: "Stworzono uzytkownika");
             }
-                catch(Exception ex)
+            catch (Exception ex)
             {
                 return (success: false, message: ex.Message);
             }
 
         }
 
-        public async Task<(bool success, string message)> Login(UserRequest request)
+        public async Task<(bool success, string message)> Login(LoginRequest request)
         {
             var user = _userRepository.GetUserByEmail(request.Email);
             if (user == null)
             {
                 return (success: false, message: "Bledny email lub haslo");
-            }                
+            }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.Password, request.Password);
 
-            if(result == PasswordVerificationResult.Failed)
+            if (result == PasswordVerificationResult.Failed)
             {
                 return (success: false, message: "Bledny email lub haslo");
             }
 
-            return (success: true, message: "Zalogowano");
+            //var tokenHandler = new JwtSecurityTokenHandler();
+
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationSettings.JwtKey));
+
+            //var tokenDescriptor = new SecurityTokenDescriptor()
+            //{
+            //    Subject = new ClaimsIdentity(new[]
+            //    {
+            //        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString().ToUpper()),
+            //        new Claim(ClaimTypes.Email, user.Email),
+            //    }),
+
+            //    Expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays),
+            //    SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+            //};
+
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            //var jwtToken = tokenHandler.WriteToken(token);
+
+            //var key = Encoding.UTF8.GetBytes(_config["Authentication:JwtKey"]);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString().ToUpper()),
+                new Claim(ClaimTypes.Email, user.Email)
+            };
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Authentication:JwtKey").Value));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: creds);
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(claims),
+            //    Expires = DateTime.Now.AddMinutes(15),
+            //    Issuer = _config["Authentication:JwtIssuer"],
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+            //        SecurityAlgorithms.HmacSha256),
+            //};
+
+
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+            //tokenHandler.WriteToken(token);
+
+
+            return (success: true, message: jwt);
         }
     }
 }

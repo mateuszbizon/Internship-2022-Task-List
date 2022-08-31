@@ -1,47 +1,52 @@
 ﻿using Helpers.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Storage.Interfaces;
+using System.Security.Claims;
 
 namespace TaskList.Controllers
 {
+    [ApiController]
+    [Route("[controller]/[action]")]
     public class IndexController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ILogger<IndexController> _logger;
 
-        public IndexController(IUserService userService)
+        public IndexController(ILogger<IndexController> logger, IUserService userService)
         {
             _userService = userService;
+            _logger = logger;
         }
 
         //logowanie
-        public async Task<IActionResult> Login()
-        {
-            return View("Login");
-        }
+        //public async Task<IActionResult> Login()
+        //{
+        //    return View("Login");
+        //}
 
         [HttpPost(Name = "Login")]
-        public async Task<IActionResult> Login(UserRequest login)
+        public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             var result = await _userService.Login(login);
 
             ViewBag.Success = result.success;
             ViewBag.Message = result.message;
 
-            return View("Login");
+            return Ok(result.message);
         }
 
         //rejestracja
-        public async Task<IActionResult> Register()
-        {
-            return View("Register");
-        }
+        //public async Task<IActionResult> Register()
+        //{
+        //    return View("Register");
+        //}
 
         [HttpPost(Name = "Register")]
         public async Task<IActionResult> Register(RegistrationRequest registration)
         {
-            var result = await _userService.CreateUser(registration);          
-           
+            var result = await _userService.CreateUser(registration);
+
             ViewBag.Success = result.success;
             ViewBag.Message = result.message;
 
@@ -49,9 +54,9 @@ namespace TaskList.Controllers
         }
 
         //index
-        public async Task<IActionResult> Index()
-        {
-            return View("Index");
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View("Index");
+        //}
     }
 }

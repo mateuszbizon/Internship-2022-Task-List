@@ -14,8 +14,7 @@ namespace Storage.Repositories
         public Group GetGroupByName(string GroupName)
         {
             return _context.Groups
-                .Where(g => g.Name == GroupName)
-                .FirstOrDefault();
+                .FirstOrDefault(g => g.Name == GroupName);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Storage.Models
 
         [ForeignKey(nameof(TaskList))]
         public int TaskListId { get; set; }
-        public virtual TaskList TaskList { get; set; }
+        public virtual TaskEntity TaskList { get; set; }
 
     }
 }

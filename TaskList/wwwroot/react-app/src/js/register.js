@@ -9,8 +9,8 @@ const passwordInput = document.querySelector('#password');
 const confirmPasswordInput = document.querySelector('#confirm-password');
 
 const registerForm = document.querySelector('form');
-const burgerBtn = document.querySelector('.burger');
 
+const burgerBtn = document.querySelector('.burger');
 const mobileNav = document.querySelector('ul');
 
 let errorMessages = [];
@@ -64,7 +64,7 @@ function validatePassword(){
     return true;
 }
 
-function validatConfirmPassword(){
+function validateConfirmPassword(){
     if(confirmPasswordInput.value !== passwordInput.value){
         confirmPasswordInput.classList.add("input-incorrect");
         confirmPasswordError.textContent = 'Hasła muszą być takie same';
@@ -82,13 +82,14 @@ function clickOnBurgerIcon(){
     burgerBtn.classList.toggle('active');
 }
 
-burgerBtn.addEventListener('click', clickOnBurgerIcon)
+burgerBtn.addEventListener('click', clickOnBurgerIcon);
 
-emailInput.addEventListener("keyup", validateEmail);
-passwordInput.addEventListener("keyup", validatePassword);
-confirmPasswordInput.addEventListener("keyup", validatConfirmPassword);
+emailInput.addEventListener("input", validateEmail);
+passwordInput.addEventListener("input", validatePassword);
+confirmPasswordInput.addEventListener("input", validateConfirmPassword);
+
 registerForm.addEventListener("submit", (e) => {
-    if(!validateEmail() || !validatePassword() || !validatConfirmPassword()){
+    if(!validateEmail() || !validatePassword() || !validateConfirmPassword()){
         e.preventDefault();
         sendError.textContent = 'Wypelnij formularz poprawnie';
         setTimeout(() =>{
