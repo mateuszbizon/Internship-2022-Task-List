@@ -93,7 +93,6 @@ a:hover::after {
 .login .wrapper {
   width: 400px;
   background-color: #fff;
-  padding: 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px #000;
 }
@@ -102,6 +101,7 @@ a:hover::after {
   text-align: center;
 }
 .login form {
+  padding: 30px;
   font-size: 20px;
 }
 .login .form-box {

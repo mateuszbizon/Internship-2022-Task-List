@@ -7,7 +7,7 @@ using System.Security.Claims;
 namespace TaskList.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class GroupController : Controller
     {
         
@@ -24,13 +24,13 @@ namespace TaskList.Controllers
 
         [HttpPost(Name = "CreateGroup")]
 
-        public ActionResult CreateGroup(GroupRequest group)
+        public async Task<IActionResult> CreateGroup(GroupRequest group)
         {
             //var userId = Guid.NewGuid; // HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            _groupService.CreateGroup(group);
+            var result = await _groupService.CreateGroup(group);
 
 
-            return Ok();
+            return Ok(result.message);
         }
     }
 }

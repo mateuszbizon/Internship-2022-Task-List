@@ -7,7 +7,7 @@ namespace Storage.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(ApplicationDbContext context): base(context)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
 
         }
@@ -17,7 +17,5 @@ namespace Storage.Repositories
             return _context.Users
                         .FirstOrDefault(u => u.Email == email);
         }
-
-        
     }
 }

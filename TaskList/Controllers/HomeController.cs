@@ -4,15 +4,18 @@ using System.Security.Claims;
 
 namespace TaskList.Controllers
 {
+    [ApiController]
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         [HttpGet]
-        public IActionResult Home()
+        [Authorize]
+        public ActionResult Home()
         {
-            ViewBag.userEmail = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var userEmail = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //ViewBag.userEmail = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-            return View("Home");
+            return Ok(userEmail);
         }
     }
 }

@@ -6,7 +6,6 @@ using Storage.Interfaces;
 using Storage.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Storage.Services
 {
@@ -85,28 +84,34 @@ namespace Storage.Services
             //var token = tokenHandler.CreateToken(tokenDescriptor);
 
             //var jwtToken = tokenHandler.WriteToken(token);
-            var key = Encoding.UTF8.GetBytes(_config["Authentication:JwtKey"]);
-            var claims = new List<Claim>();
-            claims.Add(new(JwtRegisteredClaimNames.Sub, user.Id.ToString()));
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
 
-
-            var tokenDescriptor = new SecurityTokenDescriptor
+            //var key = Encoding.UTF8.GetBytes(_config["Authentication:JwtKey"]);
+            var claims = new List<Claim>
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddMinutes(15),
-                Issuer = _config["Authentication:JwtIssuer"],
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString().ToUpper()),
+                new Claim(ClaimTypes.Email, user.Email)
             };
-            
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Authentication:JwtKey").Value));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+            var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: creds);
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            tokenHandler.WriteToken(token);
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(claims),
+            //    Expires = DateTime.Now.AddMinutes(15),
+            //    Issuer = _config["Authentication:JwtIssuer"],
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+            //        SecurityAlgorithms.HmacSha256),
+            //};
 
 
-            return (success: true, message: tokenHandler.WriteToken(token));
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+            //tokenHandler.WriteToken(token);
+
+
+            return (success: true, message: jwt);
         }
     }
 }
