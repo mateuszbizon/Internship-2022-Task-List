@@ -1,6 +1,7 @@
 import React from 'react'
 import { useFormik } from "formik";
-import './css/register.css';
+import './sass/register.scss';
+import Navbar from "./components/Navbar";
 import { registerValid } from "./Validations/RegisterValid";
 
 export default function RegisterPage() {
@@ -20,19 +21,7 @@ export default function RegisterPage() {
 
   return (
     <>
-    <nav>
-        <div className="logo">Task<span className="blue-text">List</span></div>
-        <ul>
-            <li><a href="/">Strona główna</a></li>
-            <li><a href="/login">Zaloguj się</a></li>
-            <li><a href="/register">Zarejestruj się</a></li>
-        </ul>
-        <button className="burger">
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-        </button>
-    </nav>
+    <Navbar />
     <section className="registration">
         <div className="wrapper">
             <form onSubmit={formik.handleSubmit}>
@@ -49,7 +38,7 @@ export default function RegisterPage() {
                 </div>
                 <div className="form-box">
                     <label htmlFor="confirm-password">Powtórz hasło: </label>
-                    <input type="password" id="confirm-password" value={formik.values.confirmPassword} onChange={formik.handleChange} className={formik.errors.confirmPassword ? "input-incorrect" : ""} placeholder="Powtórz hasło"/>
+                    <input type="password" id='confirm-password' name='confirmPassword' value={formik.values.confirmPassword} onChange={formik.handleChange} className={formik.errors.confirmPassword ? "input-incorrect" : ""} placeholder='Powtórz hasło'/>
                     {formik.errors.confirmPassword ? (<span className="error-text">{formik.errors.confirmPassword}</span>) : null}
                 </div>
                 <div className="control-buttons">

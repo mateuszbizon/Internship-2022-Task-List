@@ -1,219 +1,98 @@
-@import './colors';
+@import "./colors";
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-html{
-    overflow-x: hidden;
+html {
+	overflow-x: hidden;
 }
 
-body{
-    background-color: $main-background-color;
-    overflow: hidden;
+body {
+	background-color: $main-background-color;
 }
 
-nav{
-    background-color: $nav-color;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh;
-    padding: 2em;
-    position: relative;
-}
+.login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 90vh;
 
-.logo{
-    margin-left: 2em;
-    font-size: 1.8rem;
-    color: #fff;
-}
+	.wrapper {
+		width: 400px;
+		background-color: #fff;
+		border-radius: 8px;
+		box-shadow: 0 0 10px #000;
+	}
 
-.blue-text{
-    color: $main-color;
-    transition: color .3s;
-}
+	h1 {
+		margin-bottom: 20px;
+		text-align: center;
+	}
 
-ul{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-around;
-    width: 55%;
-}
+	form {
+		padding: 30px;
+		font-size: 20px;
+	}
 
-a{
-    text-decoration: none;
-    font-size: 1.8rem;
-    color: #fff;
-    position: relative;
-    transition: color 0.3s;
-}
+	.form-box {
+		margin-bottom: 30px;
+	}
 
-a:hover{
-    color: $main-color;
-}
+	label {
+		display: block;
+		margin-bottom: 5px;
+	}
 
-a::after{
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    height: 5px;
-    width: 0;
-    border-radius: 8px;
-    background-color: $main-color;
-    transition: .3s;
-}
+	input {
+		width: 100%;
+		padding: 10px 20px;
+		font-size: 15px;
+		border: 1px solid $input-color;
+		border-radius: 5px;
+		margin-bottom: 5px;
+	}
 
-a:hover::after{
-    width: 100%;
-}
+	.error-text {
+		color: $error-color;
+		font-size: 20px;
+	}
 
-.burger{
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: none;
-}
+	.control-buttons {
+		display: flex;
+		justify-content: center;
+	}
 
-.line{
-    width: 3em;
-    height: 0.3em;
-    background-color: $main-color;
-    margin: 0.6em;
-    border-radius: 20px;
-}
+	.login-btn {
+		padding: 10px 20px;
+		background-color: $main-color;
+		color: #fff;
+		border-radius: 8px;
+		border: none;
+		font-weight: bold;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
 
+	.login-btn:hover {
+		background-color: $button-hover-color;
+	}
 
-.login{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    
-    .wrapper{
-        width: 400px;
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px #000;
-    }
-    
-    h1{
-        margin-bottom: 20px;
-        text-align: center;
-    }
+	.send-error {
+		text-align: center;
+		margin-top: 10px;
+		color: $error-color;
+	}
 
-    form{
-        font-size: 20px;
-    }
+	.input-correct {
+		border: 1px solid $correct-input-color-border;
+		background-color: $correct-input-color;
+	}
 
-    .form-box{
-        margin-bottom: 30px;
-    }
-    
-    label{
-        display: block;
-        margin-bottom: 5px;
-    }
-    
-    input{
-        width: 100%;
-        padding: 10px 20px;
-        font-size: 15px;
-        border: 1px solid $input-color;
-        border-radius: 5px;
-        margin-bottom: 5px;
-    }
-    
-    .error-text{
-        color: $error-color;
-        font-size: 20px;
-    }
-    
-    .control-buttons{
-        display: flex;
-        justify-content: center;
-    }
-    
-    .login-btn{
-        padding: 10px 20px;
-        background-color: $main-color;
-        color: #fff;
-        border-radius: 8px;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color .3s;
-    }
-    
-    .login-btn:hover{
-        background-color: $button-hover-color;
-    }
-    
-    .send-error{
-        text-align: center;
-        margin-top: 10px;
-        color: $error-color;
-    }
-    
-    .input-correct{
-        border: 1px solid $correct-input-color-border;
-        background-color: $correct-input-color;
-    }
-    
-    .input-incorrect{
-        border: 1px solid $incorrect-input-color-border;
-        background-color: $incorrect-input-color;
-    }
-}
-
-//media
-
-@media (max-width: 992px){
-    .burger{
-        display: block;
-        
-        .line{
-            transition: transform .3s;
-        }
-    }
-
-    ul{
-        position: absolute;
-        right: 0;
-        top: 10vh;
-        background-color: #333;
-        height: 90vh;
-        flex-direction: column;
-        text-align: center;
-        transform: translate(100%);
-        transition: transform .3s ease-in-out;
-
-    }
-    
-    .active{
-        //ul styling
-        transform: translate(0%);
-
-        //burger icon styling
-        .line:nth-child(1){
-            transform: translateY(-300px);
-        }
-        .line:nth-child(2){
-            transform: rotate(-405deg) translateY(7px);
-        }
-        .line:nth-child(3){
-            transform: rotate(-320deg) translateY(-10px);
-        }
-    }
-    
-}
-
-@media (max-width: 768px){
-    ul{
-        width: 100%;
-    }
+	.input-incorrect {
+		border: 1px solid $incorrect-input-color-border;
+		background-color: $incorrect-input-color;
+	}
 }
