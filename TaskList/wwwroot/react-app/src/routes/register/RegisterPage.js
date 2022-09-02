@@ -1,8 +1,8 @@
 import React from 'react'
 import { useFormik } from "formik";
-import './sass/register.scss';
-import Navbar from "./components/Navbar";
-import { registerValid } from "./Validations/RegisterValid";
+import { registerValid } from "../../Validations/RegisterValid";
+import { Navbar } from "../../components/Navbar";
+import '../../sass/css/register.css';
 
 export default function RegisterPage() {
     function onSubmit(){

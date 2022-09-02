@@ -1,6 +1,6 @@
 import React from "react";
-import "./sass/index.scss";
-import Navbar from "./components/Navbar";
+import { Navbar } from "../../components/Navbar";
+import '../../sass/css/main.css';
 
 export default function MainPage() {
 	return (

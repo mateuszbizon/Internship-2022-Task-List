@@ -1,4 +1,4 @@
-@import "./colors";
+@import "./utilities/colors";
 
 * {
 	box-sizing: border-box;
@@ -19,80 +19,80 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 90vh;
-}
 
-.wrapper {
-	width: 400px;
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 0 10px #000;
-}
-
-form {
-	padding: 30px;
-	font-size: 20px;
-}
-
-h1 {
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-.form-box {
-	margin-bottom: 30px;
-	label {
-		display: block;
-		margin-bottom: 5px;
+	.wrapper {
+		width: 400px;
+		background-color: #fff;
+		border-radius: 8px;
+		box-shadow: 0 0 10px #000;
 	}
 
-	input {
-		width: 100%;
+	form {
+		padding: 30px;
+		font-size: 20px;
+	}
+
+	h1 {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.form-box {
+		margin-bottom: 30px;
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input {
+			width: 100%;
+			padding: 10px 15px;
+			font-size: 16px;
+			border: 1px solid $input-color;
+			border-radius: 5px;
+			margin-bottom: 5px;
+		}
+
+		.error-text {
+			font-size: 18px;
+			color: $error-color;
+		}
+	}
+
+	.control-buttons {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.register-btn {
 		padding: 10px 15px;
-		font-size: 16px;
-		border: 1px solid $input-color;
-		border-radius: 5px;
-		margin-bottom: 5px;
+		background-color: $main-color;
+		color: #fff;
+		font-weight: bold;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: background-color 0.3s;
 	}
 
-	.error-text {
-		font-size: 18px;
+	.register-btn:hover {
+		background-color: $button-hover-color;
+	}
+
+	.send-error {
+		margin-top: 15px;
 		color: $error-color;
+		text-align: center;
 	}
-}
 
-.control-buttons {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+	.input-correct {
+		border: 1px solid $correct-input-color-border;
+		background-color: $correct-input-color;
+	}
 
-.register-btn {
-	padding: 10px 15px;
-	background-color: $main-color;
-	color: #fff;
-	font-weight: bold;
-	border: none;
-	border-radius: 8px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.register-btn:hover {
-	background-color: $button-hover-color;
-}
-
-.send-error {
-	margin-top: 15px;
-	color: $error-color;
-	text-align: center;
-}
-
-.input-correct {
-	border: 1px solid $correct-input-color-border;
-	background-color: $correct-input-color;
-}
-
-.input-incorrect {
-	border: 1px solid $incorrect-input-color-border;
-	background-color: $incorrect-input-color;
+	.input-incorrect {
+		border: 1px solid $incorrect-input-color-border;
+		background-color: $incorrect-input-color;
+	}
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useFormik } from "formik";
-import { loginValid } from "./Validations/LoginValid";
-import "./sass/login.scss";
-import Navbar from "./components/Navbar";
+import { loginValid } from "../../Validations/LoginValid";
+import { Navbar} from "../../components/Navbar";
+import '../../sass/css/login.css';
 
 export default function LoginPage() {
 	function onSubmit(values, actions) {

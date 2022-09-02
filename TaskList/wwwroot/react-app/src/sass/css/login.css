@@ -1,0 +1,96 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: rgb(51, 51, 51);
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 90vh;
+}
+.login .wrapper {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px #000;
+          box-shadow: 0 0 10px #000;
+}
+.login h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.login form {
+  padding: 30px;
+  font-size: 20px;
+}
+.login .form-box {
+  margin-bottom: 30px;
+}
+.login label {
+  display: block;
+  margin-bottom: 5px;
+}
+.login input {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 15px;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+.login .error-text {
+  color: rgb(236, 38, 38);
+  font-size: 20px;
+}
+.login .control-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.login .login-btn {
+  padding: 10px 20px;
+  background-color: rgb(65, 105, 225);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.login .login-btn:hover {
+  background-color: rgb(1, 62, 160);
+}
+.login .send-error {
+  text-align: center;
+  margin-top: 10px;
+  color: rgb(236, 38, 38);
+}
+.login .input-correct {
+  border: 1px solid rgb(31, 170, 31);
+  background-color: rgba(31, 170, 31, 0.4);
+}
+.login .input-incorrect {
+  border: 1px solid rgb(221, 6, 6);
+  background-color: rgba(221, 6, 6, 0.4);
+}/*# sourceMappingURL=login.css.map */

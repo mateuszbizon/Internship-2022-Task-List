@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import "./Navbar.scss";
+import "../sass/css/navbar.css";
 
-export default function Navbar() {
+export function Navbar() {
 	const navRef = useRef();
 	const burgerBtnRef = useRef();
 
@@ -34,5 +34,3 @@ export default function Navbar() {
 		</nav>
 	);
 }
-
-
