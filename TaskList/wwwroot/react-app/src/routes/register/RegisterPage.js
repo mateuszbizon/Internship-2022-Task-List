@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormik } from "formik";
 import { registerValid } from "../../Validations/RegisterValid";
-import { Navbar } from "../../components/Navbar";
+import Navbar from "../../components/Navbar";
 import '../../sass/css/register.css';
 
 export default function RegisterPage() {
@@ -41,9 +41,7 @@ export default function RegisterPage() {
                     <input type="password" id='confirm-password' name='confirmPassword' value={formik.values.confirmPassword} onChange={formik.handleChange} className={formik.errors.confirmPassword ? "input-incorrect" : ""} placeholder='Powtórz hasło'/>
                     {formik.errors.confirmPassword ? (<span className="error-text">{formik.errors.confirmPassword}</span>) : null}
                 </div>
-                <div className="control-buttons">
-                    <button type="submit" className="register-btn">Zarejestruj się</button>
-                </div>
+                <button type="submit" className="register-btn">Zarejestruj się</button>
                 <p className="send-error"></p>
             </form>
         </div>

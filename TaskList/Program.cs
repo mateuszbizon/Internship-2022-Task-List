@@ -25,19 +25,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //ValidIssuer = builder.Configuration["Authentication:JwtIssuer"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Authentication:JwtKey").Value))
         };
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
-                var token = context.Request.Headers[HeaderNames.Authorization];
-                if (!string.IsNullOrEmpty(token))
-                {
-                    context.Token = token;
-                }
+        //options.Events = new JwtBearerEvents
+        //{
+        //    OnMessageReceived = context =>
+        //    {
+        //        var token = context.Request.Headers[HeaderNames.Authorization];
+        //        if (!string.IsNullOrEmpty(token))
+        //        {
+        //            context.Token = token;
+        //        }
 
-                return Task.CompletedTask;
-            }
-        };
+        //        return Task.CompletedTask;
+        //    }
+        //};
     });
 
 // Add services to the container.

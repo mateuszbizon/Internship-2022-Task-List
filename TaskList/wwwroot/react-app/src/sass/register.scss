@@ -59,16 +59,12 @@ body {
 		}
 	}
 
-	.control-buttons {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-
 	.register-btn {
 		padding: 10px 15px;
 		background-color: $main-color;
 		color: #fff;
+		width: 100%;
+		font-size: 15px;
 		font-weight: bold;
 		border: none;
 		border-radius: 8px;

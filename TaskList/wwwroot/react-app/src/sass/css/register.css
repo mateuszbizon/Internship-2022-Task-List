@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -14,23 +13,16 @@ body {
 }
 
 .registration {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 90vh;
 }
 .registration .wrapper {
   width: 400px;
   background-color: #fff;
   border-radius: 8px;
-  -webkit-box-shadow: 0 0 10px #000;
-          box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
 }
 .registration form {
   padding: 30px;
@@ -59,26 +51,16 @@ body {
   font-size: 18px;
   color: rgb(236, 38, 38);
 }
-.registration .control-buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
 .registration .register-btn {
   padding: 10px 15px;
   background-color: rgb(65, 105, 225);
   color: #fff;
+  width: 100%;
+  font-size: 15px;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 .registration .register-btn:hover {

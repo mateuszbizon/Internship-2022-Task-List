@@ -59,16 +59,13 @@ body {
 		color: $error-color;
 		font-size: 20px;
 	}
-
-	.control-buttons {
-		display: flex;
-		justify-content: center;
-	}
-
+	
 	.login-btn {
 		padding: 10px 20px;
 		background-color: $main-color;
 		color: #fff;
+		width: 100%;
+		font-size: 15px;
 		border-radius: 8px;
 		border: none;
 		font-weight: bold;

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { loginValid } from "../../Validations/LoginValid";
-import { Navbar} from "../../components/Navbar";
+import Navbar from "../../components/Navbar";
 import '../../sass/css/login.css';
 
 export default function LoginPage() {
@@ -52,6 +52,7 @@ export default function LoginPage() {
 							<input
 								type='email'
 								id='email'
+								name='email'
 								value={formik.values.email}
 								onChange={formik.handleChange}
 								className={formik.errors.email ? "input-incorrect" : ""}
@@ -75,11 +76,9 @@ export default function LoginPage() {
 								<span className='error-text'>{formik.errors.password}</span>
 							) : null}
 						</div>
-						<div className='control-buttons'>
-							<button type='submit' className='login-btn'>
-								Zaloguj się
-							</button>
-						</div>
+						<button type='submit' className='login-btn'>
+							Zaloguj się
+						</button>						
 						<p className='send-error'></p>
 					</form>
 				</div>

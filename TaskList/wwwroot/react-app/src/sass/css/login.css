@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -14,23 +13,16 @@ body {
 }
 
 .login {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 90vh;
 }
 .login .wrapper {
   width: 400px;
   background-color: #fff;
   border-radius: 8px;
-  -webkit-box-shadow: 0 0 10px #000;
-          box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
 }
 .login h1 {
   margin-bottom: 20px;
@@ -59,23 +51,16 @@ body {
   color: rgb(236, 38, 38);
   font-size: 20px;
 }
-.login .control-buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
 .login .login-btn {
   padding: 10px 20px;
   background-color: rgb(65, 105, 225);
   color: #fff;
+  width: 100%;
+  font-size: 15px;
   border-radius: 8px;
   border: none;
   font-weight: bold;
   cursor: pointer;
-  -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 .login .login-btn:hover {

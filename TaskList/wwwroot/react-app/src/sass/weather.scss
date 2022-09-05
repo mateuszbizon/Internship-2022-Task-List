@@ -1,0 +1,73 @@
+@import './utilities/colors';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.check-weather{
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../../img/weather-background-big.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+
+    .shadow{
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        height: 100%;
+        z-index: -5;
+    }
+
+    .search-input{
+        width: 25%;
+        padding: 10px 20px;
+        outline: none;
+        border-radius: 0 0 8px 8px;
+        margin-bottom: 200px;
+    }
+
+    .location-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        margin-bottom: 100px;
+
+        .location{
+            font-size: 50px;
+        }
+
+        .date{
+            font-size: 30px;
+        }
+    }
+
+    .weather-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .temperature{
+            background-color: rgba(128, 128, 128, 0.2);
+            color: $main-color;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 70px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .weather{
+            font-size: 30px;
+            color: #fff;
+        }
+    }
+}
+
