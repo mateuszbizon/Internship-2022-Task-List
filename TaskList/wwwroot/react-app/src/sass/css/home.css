@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.home {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 90vh;
+  background-image: url("../../img/home-background-big.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 0;
+}
+.home .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.home .item {
+  margin: 0 10px;
+  padding: 5px 10px;
+  z-index: 5;
+}
+.home .item a {
+  position: relative;
+  color: #fff;
+  font-size: 50px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.home .item a:hover {
+  color: rgb(65, 105, 225);
+}
+.home .item a::before, .home .item a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  transition: 0.3s;
+}
+.home .item a::before {
+  left: -15px;
+  top: -5px;
+}
+.home .item a::after {
+  right: -15px;
+  bottom: -5px;
+}
+.home .item a:hover::before, .home .item a:hover::after {
+  width: 50px;
+  height: 40px;
+}
+.home .item a:hover::before {
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+.home .item a:hover::after {
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+}/*# sourceMappingURL=home.css.map */

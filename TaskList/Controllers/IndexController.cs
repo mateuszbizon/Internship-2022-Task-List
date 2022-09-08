@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Storage.Interfaces;
 using System.Security.Claims;
+using TaskList.Responses;
 
 namespace TaskList.Controllers
 {
@@ -30,10 +31,13 @@ namespace TaskList.Controllers
         {
             var result = await _userService.Login(login);
 
-            ViewBag.Success = result.success;
-            ViewBag.Message = result.message;
+            var json = new LoginResponse()
+            {
+                Success = result.success,
+                Message = result.message,
+            };
 
-            return Ok(result.message);
+            return Ok(JsonConvert.SerializeObject(json));
         }
 
         //rejestracja
@@ -43,14 +47,17 @@ namespace TaskList.Controllers
         //}
 
         [HttpPost(Name = "Register")]
-        public async Task<IActionResult> Register(RegistrationRequest registration)
+        public async Task<IActionResult> Register([FromBody] RegistrationRequest registration)
         {
             var result = await _userService.CreateUser(registration);
 
-            ViewBag.Success = result.success;
-            ViewBag.Message = result.message;
+            var json = new RegisterResponse()
+            {
+                Success = result.success,
+                Message = result.message
+            };
 
-            return View("Register");
+            return Ok(JsonConvert.SerializeObject(json));
         }
 
         //index

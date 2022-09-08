@@ -5,6 +5,7 @@ import LoginPage from "./routes/Login/LoginPage";
 import RegisterPage from "./routes/register/RegisterPage";
 import WeatherPage from "./routes/Weather/Weather";
 import Error404Page from "./routes/error404/error404Page";
+import HomePage from "./routes/HomePage/HomePage";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<Route path='/login' element={<LoginPage />} />
 				<Route path='/register' element={<RegisterPage />} />
 				<Route path='/weather' element={<WeatherPage />} />
+				<Route path='/home' element={<HomePage />} />
 				<Route path='*' element={<Error404Page />} />
 			</Routes>
 		</Router>

@@ -7,11 +7,11 @@ export default function MainPage() {
 		<>
 			<Navbar />
 			<header>
-				<div class='shadow'></div>
-				<div class='header-text'>
+				<div className='shadow'></div>
+				<div className='header-text'>
 					<h1>Witaj na praktykach w Sharply</h1>
 					<p>
-						W miejscu gdzie stworzysz Task<span class='blue-text'>Liste</span>
+						W miejscu gdzie stworzysz Task<span className='blue-text'>Liste</span>
 					</p>
 				</div>
 			</header>

@@ -21,7 +21,7 @@ function Weather() {
                 console.log(result);
             })
         }
-    }
+    } 
 
     const dateBuilder = d =>{
         let days = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
@@ -59,4 +59,4 @@ function Weather() {
   )
 }
 
-export default Weather
+export default Weather;

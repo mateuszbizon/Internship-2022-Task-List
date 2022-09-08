@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
 import { useFormik } from "formik";
 import { registerValid } from "../../Validations/RegisterValid";
 import Navbar from "../../components/Navbar";
 import '../../sass/css/register.css';
 
 export default function RegisterPage() {
+    const [registerMessage, setRegisterMessage] = useState('')
+
     function onSubmit(){
         console.log("submitted")
+
+        var config = {
+			method: "post",
+			url: "Index/Register",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			data: JSON.stringify({
+                "email": formik.values.email,
+                "password": formik.values.password,
+            })
+		};
+
+		axios(config)
+			.then(res => {
+				setRegisterMessage(res.data.Message)
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+
+            clearInputs();
     }
+
+    function clearInputs(){
+		formik.values.email = ''
+		formik.values.password = ''
+        formik.values.confirmPassword = ''
+	}
 
     const formik = useFormik({
         initialValues: {
@@ -42,7 +73,7 @@ export default function RegisterPage() {
                     {formik.errors.confirmPassword ? (<span className="error-text">{formik.errors.confirmPassword}</span>) : null}
                 </div>
                 <button type="submit" className="register-btn">Zarejestruj się</button>
-                <p className="send-error"></p>
+                <p className="send-error">{registerMessage}</p>
             </form>
         </div>
     </section>

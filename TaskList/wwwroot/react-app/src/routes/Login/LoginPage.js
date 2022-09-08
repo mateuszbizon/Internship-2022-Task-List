@@ -1,34 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginValid } from "../../Validations/LoginValid";
 import Navbar from "../../components/Navbar";
 import '../../sass/css/login.css';
 
 export default function LoginPage() {
-	function onSubmit(values, actions) {
+	const [loginSuccess, setLoginSuccess] = useState('');
+	const [loginMessage, setLoginMessage] = useState('');
+
+	function onSubmit() {
 		console.log("submitted");
 		var data = JSON.stringify({
-			email: values.email,
-			password: values.password,
+			"email": formik.values.email,
+			"password": formik.values.password,
 		});
 
 		var config = {
 			method: "post",
-			url: "https://localhost:7196/Index/Login",
+			url: "Index/Login",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/json"
 			},
 			data: data,
 		};
 
 		axios(config)
-			.then(function (response) {
-				console.log(JSON.stringify(response.data));
+			.then(res => {
+				setLoginSuccess(res.data.Success);
+				setLoginMessage(res.data.Message)
+				// console.log(loginMessage);
+				// console.log(loginSuccess);
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
+
+			clearInputs();
+	}
+
+	function clearInputs(){
+		formik.values.email = ''
+		formik.values.password = ''
 	}
 
 	const formik = useFormik({
@@ -79,7 +93,7 @@ export default function LoginPage() {
 						<button type='submit' className='login-btn'>
 							Zaloguj się
 						</button>						
-						<p className='send-error'></p>
+						<div className='send-error'>{!loginSuccess ? loginMessage : <Navigate to='/home' />}</div>
 					</form>
 				</div>
 			</section>

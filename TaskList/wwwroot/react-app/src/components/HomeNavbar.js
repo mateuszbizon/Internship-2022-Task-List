@@ -17,6 +17,9 @@ function HomeNavbar() {
         </div>
         <ul ref={navRef}>
             <li>
+                <a href='/home'>Strona domowa</a>
+            </li>
+            <li>
                 <a href='/weather'>Sprawdź pogodę</a>
             </li>
             <li>
